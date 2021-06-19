@@ -1,80 +1,31 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form'
-import 'antd/dist/antd.css'
-import './App.css'
-import { useDispatch } from 'react-redux'
-import { deleteSizeThunk, getSizeThunk } from './store/Size/action'
-import Model from './Model';
+import DefaultVersion from './components/DefaultVersion'
+import 'antd/dist/antd.css';
+import './App.css';
+import { Tabs } from 'antd';
+import IlyasVersion from './components/IlyasVersion';
+
+const { TabPane } = Tabs;
+
+function callback(key) {
+  console.log(key);
+}
 
 const App = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    dispatch(deleteSizeThunk());
-  };
-
-  const dispatch=useDispatch()
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm()
-	const onSubmit = (data) => {
-    dispatch(getSizeThunk(data));
-		showModal();
-	}
-
-  
-
 	return (
-		<div className='App' onSubmit={handleSubmit(onSubmit)}>
-			<form className='sign-up'>
+		<div className='App'>
+			<div className='sign-up'>
 				<h1 className='sign-up-title'>Подобрать одежду по параметрам собаки</h1>
-				<input
-					type='number'
-					className='sign-up-input'
-					placeholder='Обхват шеи'
-					{...register('l1', { min: 1, max: 99 })}
-				/>
-				<input
-					type='number'
-					className='sign-up-input'
-					placeholder='Объем груди'
-					{...register('l2', { min: 1, max: 99 })}
-				/>
-				<input
-					type='number'
-					className='sign-up-input'
-					placeholder='Длина по спине'
-					{...register('l3', { min: 1, max: 99 })}
-				/>
-				<input
-					type='number'
-					className='sign-up-input'
-					placeholder='Длина от пола до шеи'
-					{...register('l4', { min: 1, max: 99 })}
-				/>
-				<input
-					type='number'
-					className='sign-up-input'
-					placeholder='Расстояние между лап'
-					{...register('l5', { min: 1, max: 99 })}
-				/>
-				<input
-					type='number'
-					className='sign-up-input'
-					placeholder='Объем таза'
-					{...register('l6', { min: 1, max: 99 })}
-				/>
-				<input type='submit' value='Получить размер' class='sign-up-button' />
-			</form>
-      <Model isModalVisible={isModalVisible} handleCancel={handleCancel} showModal={showModal}/>
+
+				<Tabs defaultActiveKey='1' onChange={callback}>
+					{' '}
+					<TabPane tab='Вариант подсчета от Алекса' key='1'>
+					<DefaultVersion />
+					</TabPane>
+					<TabPane tab='Вариант подсчета от Ильяса' key='2'>
+						<IlyasVersion/>
+					</TabPane>
+				</Tabs>
+			</div>
 		</div>
 	)
 }

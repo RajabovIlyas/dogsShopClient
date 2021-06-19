@@ -18,6 +18,17 @@ export const getSizeThunk = (data) => (dispatch) => {
 	)
 }
 
+export const getSizeNewVersionThunk = (data) => (dispatch) => {
+	sizeAPI.getSizeNewVersion(data).then(
+		(data) => {
+			dispatch(setSizeAction(data))
+		},
+		(error) => {
+			dispatch(setSizeAction(error.response.data))
+		}
+	)
+}
+
 export const deleteSizeThunk = () => (dispatch) => {
 	dispatch(deleteSizeAction());
 }
