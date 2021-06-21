@@ -16,12 +16,12 @@ const App = () => {
 			<div className='sign-up'>
 				<h1 className='sign-up-title'>Подобрать одежду по параметрам собаки</h1>
 
-				<Tabs defaultActiveKey='1' onChange={callback}>
+				<Tabs defaultActiveKey='1' onChange={callback} centered>
 					{' '}
-					<TabPane tab='Вариант подсчета от Алекса' key='1'>
+					<TabPane tab='Вариант 1' key='1'>
 					<DefaultVersion />
 					</TabPane>
-					<TabPane tab='Вариант подсчета от Ильяса' key='2'>
+					<TabPane tab='Вариант 2' key='2'>
 						<IlyasVersion/>
 					</TabPane>
 				</Tabs>
